@@ -1,0 +1,357 @@
+% EECE 2140 – Assignment #01 (Setup & Tools Check) Template
+% Overleaf-ready LaTeX template for students
+% -----------------------------------------------------------------------------
+\documentclass[11pt]{article}
+
+% --- Basic packages ---
+\usepackage[margin=1in]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{amsmath, amssymb}
+
+% --- Hyperref setup ---
+\hypersetup{
+  colorlinks=true,
+  urlcolor=blue,
+  linkcolor=blue,
+  citecolor=blue
+}
+
+% --- Listings (for code/terminal) ---
+\lstdefinestyle{term}{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{green!40!black},
+  commentstyle=\color{black!50},
+  numberstyle=\tiny\color{black!50},
+  numbers=left,
+  stepnumber=1,
+  numbersep=8pt,
+  showstringspaces=false,
+  frame=single,
+  framerule=0.3pt,
+  breaklines=true,
+  tabsize=2
+}
+
+% --- Check box style ---
+\tcbset{colback=gray!5,colframe=black!50,arc=1mm,outer arc=1mm}
+\newtcolorbox{checkbox}[1][]{
+  title=\textbf{Checklist Item},#1
+}
+
+% --- Useful macros ---
+\newcommand{\coursename}{EECE 2140: Computing Fundamentals for Engineers}
+\newcommand{\semester}{Spring 2026}
+\newcommand{\assignmentno}{01}
+\newcommand{\instructor}{Dr.~Fatema Nafa}
+
+% Fill these out before you begin
+\newcommand{\studentname}{<Your Name Here>}
+\newcommand{\nuid}{<Your NUID>}
+\newcommand{\email}{<your.email@northeastern.edu>}
+
+% --- Task environment ---
+\newcounter{task}
+\newenvironment{task}[1][]{%
+  \refstepcounter{task}%
+  \par\vspace{0.75em}
+  {\large\bfseries Task~\thetask.}\ \\[-0.25em]
+  \textit{#1}\par\vspace{0.25em}
+}{\vspace{0.75em}}
+
+% --- Document start ---
+\begin{document}
+
+% --- Logo ---
+\begin{center}
+  \includegraphics[width=0.58\textwidth]{logo.png}\\[1.85em]
+\end{center}
+
+\begin{center}
+  {\Large \textbf{\coursename}}\\[2pt]
+  {\large \semester}\\[8pt]
+  {\Large \textbf{Lab Assignment \#\assignmentno\: Set up GitHub repo and VSCode/Makefile build environment on Linux}}\\[10pt]
+  {\normalsize \textbf{Topic:} WSL2 + VS Code + GitHub + Overleaf}\\[10pt]
+\end{center}
+
+
+\begin{tabular}{@{}p{1.8in}p{4.6in}@{}}
+\textbf{Student Name} & \studentname \\
+\textbf{NUID} & \nuid \\
+\textbf{Email} & \email \\
+\textbf{Instructor} & \instructor \\
+\textbf{Due Date} & <Enter Due Date> \\
+\end{tabular}
+
+\vspace{1em}
+\noindent\textbf{Submission Checklist (must match syllabus requirements)}
+\begin{itemize}[leftmargin=1.5em]
+  \item Submit \textbf{one PDF} generated from this Overleaf report.
+  \item Include \textbf{clear screenshots} for each task (text must be readable).
+  \item Include your \textbf{GitHub profile link} and \textbf{Overleaf project link} in the report.
+  \item File name: \texttt{Assignment\assignmentno\_LastName.pdf}
+\end{itemize}
+
+\vspace{0.5em}
+\noindent\textbf{How to complete this assignment}
+\begin{enumerate}[leftmargin=1.5em]
+  \item Complete each task below in order.
+  \item For each task, include the required evidence (screenshots, links, and short notes).
+  \item When you paste a link, ensure it opens correctly (no private/local-only links unless instructed).
+\end{enumerate}
+
+\vspace{0.75em}
+\hrule
+\vspace{0.75em}
+
+% -------------------------
+% SECTION A: WSL2 CHECK
+% -------------------------
+\section*{Section A: WSL2 Installation Verification}
+
+\begin{task}[Verify that WSL2 is installed and Ubuntu runs]
+\begin{checkbox}
+\textbf{Goal:} Confirm that WSL is installed, WSL2 is enabled, and your Linux distro launches.\\
+\textbf{What to do (Windows PowerShell):}
+\begin{itemize}[leftmargin=1.5em]
+  \item Open \textbf{PowerShell} and run:
+\end{itemize}
+\end{checkbox}
+
+\begin{lstlisting}[style=term,caption={WSL checks (PowerShell)}]
+wsl --status
+wsl -l -v
+\end{lstlisting}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot showing output of \texttt{wsl --status}
+  \item Screenshot showing output of \texttt{wsl -l -v} (Version should be \texttt{2})
+  \item Screenshot showing Ubuntu terminal open (your username visible)
+\end{itemize}
+
+\noindent\textbf{Notes (1--3 sentences):} \\
+\textit{Write what you observe (e.g., distro name, default version, any issues).}
+\end{task}
+
+\begin{task}[Install build tools inside Ubuntu and verify versions]
+\begin{checkbox}
+\textbf{Goal:} Install the compiler and tools we will use all semester.\\
+\textbf{What to do (Ubuntu terminal):} Run the commands below.
+\end{checkbox}
+
+\begin{lstlisting}[style=term,caption={Install tools (Ubuntu)}]
+sudo apt update
+sudo apt install -y build-essential cmake git
+g++ --version
+cmake --version
+git --version
+\end{lstlisting}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot showing successful install command(s)
+  \item Screenshot showing \texttt{g++}, \texttt{cmake}, and \texttt{git} version outputs
+\end{itemize}
+
+\noindent\textbf{Notes (1--3 sentences):}
+\end{task}
+
+% -------------------------
+% SECTION B: VS CODE + WSL
+% -------------------------
+\section*{Section B: Visual Studio Code + WSL Integration}
+
+\begin{task}[Install VS Code and connect it to WSL]
+\begin{checkbox}
+\textbf{Goal:} Use VS Code as your editor while compiling in WSL.\\
+\textbf{What to do:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Install VS Code on Windows.
+  \item In VS Code, install the \textbf{WSL extension} (Microsoft).
+  \item From Ubuntu terminal, open a folder in VS Code using \texttt{code .}
+\end{itemize}
+\end{checkbox}
+
+\begin{lstlisting}[style=term,caption={Open VS Code from Ubuntu (WSL)}]
+cd ~
+mkdir -p eece2140
+cd eece2140
+code .
+\end{lstlisting}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot of VS Code showing bottom-left text \texttt{WSL: Ubuntu} (or similar)
+  \item Screenshot of VS Code integrated terminal showing a Linux prompt (e.g., \texttt{username@...:~/eece2140\$})
+\end{itemize}
+
+\noindent\textbf{Notes (1--3 sentences):}
+\end{task}
+
+\begin{task}[Create and run a C++ ``Hello World'' from VS Code in WSL]
+\begin{checkbox}
+\textbf{Goal:} Confirm you can compile and run a C++ program using Linux tools.\\
+\textbf{What to do:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Create \texttt{main.cpp} in the \texttt{eece2140} folder.
+  \item Compile and run using the terminal commands below.
+\end{itemize}
+\end{checkbox}
+
+\begin{lstlisting}[style=term,caption={Compile and run (WSL terminal inside VS Code)}]
+g++ -std=c++17 -Wall -Wextra main.cpp -o main
+./main
+\end{lstlisting}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot of \texttt{main.cpp} open in VS Code
+  \item Screenshot of terminal output showing successful run (your program output)
+\end{itemize}
+
+\noindent\textbf{Paste your C++ code here:}
+\begin{lstlisting}[style=term,caption={main.cpp}]
+#include <iostream>
+
+int main() {
+    std::cout << "Hello from EECE 2140 on WSL2!\n";
+    return 0;
+}
+\end{lstlisting}
+
+\noindent\textbf{Notes (1--3 sentences):}
+\end{task}
+
+% -------------------------
+% SECTION C: GITHUB SETUP
+% -------------------------
+\section*{Section C: GitHub Account and First Repository}
+
+\begin{task}[Create a GitHub account and set up your profile]
+\begin{checkbox}
+\textbf{Goal:} Create a GitHub account and confirm your profile is accessible.\\
+\textbf{What to do:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Create (or confirm) your GitHub account.
+  \item Add a profile picture and your name.
+\end{itemize}
+\end{checkbox}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot of your GitHub profile page
+  \item Paste your GitHub profile link below
+\end{itemize}
+
+\noindent\textbf{GitHub Profile Link:} \\
+\url{<Paste your GitHub profile URL here>}
+\end{task}
+
+\begin{task}[Create a repository and push your Hello World project]
+\begin{checkbox}
+\textbf{Goal:} Create a repo and push code from WSL using git.\\
+\textbf{What to do (WSL terminal):} Use the command sequence below (edit placeholders).
+\end{checkbox}
+
+\begin{lstlisting}[style=term,caption={Initialize git repo and push (edit placeholders)}]
+cd ~/eece2140
+git init
+git add main.cpp
+git commit -m "Add Hello World"
+
+# Replace with your repo URL from GitHub (HTTPS or SSH)
+git branch -M main
+git remote add origin <YOUR_REPO_URL_HERE>
+git push -u origin main
+\end{lstlisting}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot of terminal showing successful \texttt{git push}
+  \item Screenshot of your GitHub repo showing \texttt{main.cpp} uploaded
+\end{itemize}
+
+\noindent\textbf{GitHub Repository Link:} \\
+\url{<Paste your repository URL here>}
+
+\noindent\textbf{Notes (1--3 sentences):}
+\end{task}
+
+% -------------------------
+% SECTION D: OVERLEAF SETUP
+% -------------------------
+\section*{Section D: Overleaf Setup and Report Submission}
+
+\begin{task}[Create an Overleaf account and compile this report]
+\begin{checkbox}
+\textbf{Goal:} Confirm you can use Overleaf and compile a PDF.\\
+\textbf{What to do:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Create (or confirm) an Overleaf account.
+  \item Upload this \texttt{.tex} file to a new Overleaf project.
+  \item Click \textbf{Recompile} and download the PDF.
+\end{itemize}
+\end{checkbox}
+
+\noindent\textbf{Required evidence:}
+\begin{itemize}[leftmargin=1.5em]
+  \item Screenshot of your Overleaf project (left file tree visible)
+  \item Screenshot of successfully compiled PDF preview
+\end{itemize}
+
+\noindent\textbf{Overleaf Project Link (if shareable):} \\
+\url{<Paste Overleaf project link here (optional if private)>}
+
+\noindent\textbf{Notes (1--3 sentences):}
+\end{task}
+
+% -------------------------
+% Appendix: Screenshots
+% -------------------------
+\clearpage
+\appendix
+\section*{Appendix: Screenshots}
+
+\noindent Insert your screenshots here. Ensure they are readable and clearly labeled.
+
+\vspace{0.5em}
+\subsection*{A1: WSL status and distro version}
+\includegraphics[width=\linewidth]{figs/wsl_status.png}
+
+\vspace{0.5em}
+\subsection*{A2: Tool versions in Ubuntu}
+\includegraphics[width=\linewidth]{figs/tool_versions.png}
+
+\vspace{0.5em}
+\subsection*{B1: VS Code showing WSL: Ubuntu}
+\includegraphics[width=\linewidth]{figs/vscode_wsl.png}
+
+\vspace{0.5em}
+\subsection*{B2: Hello World execution}
+\includegraphics[width=\linewidth]{figs/hello_run.png}
+
+\vspace{0.5em}
+\subsection*{C1: GitHub profile and repo}
+\includegraphics[width=\linewidth]{figs/github_repo.png}
+
+\vspace{0.5em}
+\subsection*{D1: Overleaf project + compiled PDF}
+\includegraphics[width=\linewidth]{figs/overleaf_compile.png}
+
+\vspace{1em}
+\noindent\textit{Reminder:} Your screenshots must be clear, readable, and directly support each checklist item.
+
+\end{document}
