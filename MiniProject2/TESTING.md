@@ -3,6 +3,7 @@
 # Enqueue until full  
 kennethfan@Mac MiniProject2 % ./main
 
+```
 menu
 1: enqueue
 2: dequeue
@@ -90,10 +91,12 @@ menu
 6: clear
 7: exit
 Input: 7
+```
 
 # Dequeue until empty  
 kennethfan@Mac MiniProject2 % ./main
 
+```
 menu
 1: enqueue
 2: dequeue
@@ -258,10 +261,12 @@ menu
 6: clear
 7: exit
 Input: 7
+```
 
 # Wrap-around test  
 kennethfan@Mac MiniProject2 % ./main
 
+```
 menu
 1: enqueue
 2: dequeue
@@ -403,10 +408,12 @@ menu
 6: clear
 7: exit
 Input: 7
+```
 
 # Mixed operations  
 kennethfan@Mac MiniProject2 % ./main
 
+```
 menu
 1: enqueue
 2: dequeue
@@ -526,3 +533,4 @@ menu
 6: clear
 7: exit
 Input: 7
+```

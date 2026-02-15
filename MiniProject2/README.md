@@ -15,6 +15,7 @@ g++ src/Queue.cpp src/main.cpp -o main
 
 ## Example Usage
 
+```
 menu
 1: enqueue
 2: dequeue
@@ -167,3 +168,4 @@ menu
 6: clear
 7: exit
 Input: 7
+```
